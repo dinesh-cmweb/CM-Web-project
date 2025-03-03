@@ -30,7 +30,9 @@ class MovieForm extends FormRequest
             'movie_genre' => 'required',
         ];
     }
-    public function messages() {
+
+    public function messages()
+    {
         return [
             'name.required' => 'movie name is required',
             'director.required' => 'director is required',
