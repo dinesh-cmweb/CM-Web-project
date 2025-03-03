@@ -6,7 +6,6 @@ use App\Http\Requests\MovieForm;
 use App\Models\Genre;
 use App\Models\Movie;
 use App\Models\MovieGenre;
-use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
@@ -16,9 +15,10 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::with('moviesGenre')->get();
-        $genres  =  Genre::all();
-        return response()->json(['movies' => $movies , 'genres' => $genres]);
-//        return view('app', compact('movies'));
+        $genres = Genre::all();
+
+        return response()->json(['movies' => $movies, 'genres' => $genres]);
+        //        return view('app', compact('movies'));
     }
 
     /**
@@ -57,6 +57,7 @@ class MovieController extends Controller
             $data[$i]['genre'] = $genre[$i];
         }
         MovieGenre::insert($data);
+
         return response()->json([
             'status' => 200,
             'message' => 'movie added successfully.',
@@ -79,6 +80,7 @@ class MovieController extends Controller
     {
         // $movies = Movie::with('MoviesGenre')->get();
         $movie = Movie::with('MoviesGenre')->find($movie->id);
+
         return response()->json(['movie' => $movie]);
         // return view('app', compact('edit', 'movies'));
     }
@@ -107,9 +109,10 @@ class MovieController extends Controller
         }
         // print_r($data);
         MovieGenre::insert($data);
+
         return response()->json([
-            'status'=> 200,
-            'message'=> 'updated successfully',
+            'status' => 200,
+            'message' => 'updated successfully',
         ]);
         // return $genre;
     }
@@ -121,6 +124,7 @@ class MovieController extends Controller
     {
         $movie = Movie::find($id);
         $movie->delete();
+
         return response()->json([
             'status' => 200,
             'message' => 'movie deleted successfully.',

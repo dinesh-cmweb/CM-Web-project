@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('movie_id');
             $table->string('genre');
-            
+
             $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade')->onUpdate('cascade');
         });
     }
+
     /**
      * Reverse the migrations.
      */
